@@ -37,9 +37,13 @@ export const getOneHotel = async (req: RequestCustom, res: Response) => {
 
 export const updateById = async (req: RequestCustom, res: Response) => {
   try {
-    const updateHotel = await Hotel.findByIdAndUpdate(req.params.id, {
-      $set: req.body,
-    });
+    const updateHotel = await Hotel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
     success(req, res, 200, updateHotel);
   } catch (e) {
     console.log(e);

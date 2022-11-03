@@ -9,7 +9,7 @@ const RoomSchema = new mongoose.Schema(
       unique: true,
     },
     price: {
-      type: String,
+      type: Number,
       required: true,
       unique: true,
     },

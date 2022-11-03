@@ -6,6 +6,7 @@ const app = express();
 import authRoute from "./routes/auth";
 import hotelRoute from "./routes/hotel";
 import userRoute from "./routes/user";
+import RoomRoute from "./routes/room";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -26,6 +27,7 @@ app.get("/api", (_req, res) => {
 app.use("/api/auth", authRoute);
 app.use("/api/hotels", hotelRoute);
 app.use("/api/users", userRoute);
+app.use("/api/rooms", RoomRoute);
 
 app.listen(port, () => {
   console.log("server running on port ", port);
