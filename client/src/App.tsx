@@ -5,6 +5,7 @@ import Hotels from "./pages/Hotels";
 import Hotel from "./pages/Hotel";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/hotels/:id" element={<Hotel />} />
         </Routes>
+
+        <Footer />
       </BrowserRouter>
     </div>
   );

@@ -20,7 +20,7 @@ module.exports = {
         // => @media (min-width: 1536px) { ... }
       },
       colors: {
-        myblue: "#003550",
+        myblue: "#003580",
         myblue2: "#0071c2",
       },
     },
