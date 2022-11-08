@@ -8,6 +8,7 @@ export interface User {
 }
 export interface RequestCustom extends Request {
   user?: User;
+  limit?: string | number;
 }
 export interface RequestCustomUser extends Request {
   body: User;

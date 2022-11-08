@@ -15,8 +15,12 @@ export const createHotel = async (req: RequestCustom, res: Response) => {
 };
 
 export const getAllHotel = async (req: RequestCustom, res: Response) => {
+  const { min, max, ...others } = req.query;
   try {
-    const getAll = await Hotel.find();
+    const getAll = await Hotel.find({
+      ...others,
+      cheapestPrice: { $gt: Number(min) | 1, $lt: Number(max) | 99999 },
+    }).limit(Number(req.query?.limit));
     success(req, res, 200, getAll);
   } catch (e) {
     console.log(e);
@@ -62,4 +66,54 @@ export const deleteById = async (req: RequestCustom, res: Response) => {
   }
 };
 
-exports = { createHotel, updateById, getAllHotel, getOneHotel, deleteById };
+export const countByCity = async (req: RequestCustom, res: Response) => {
+  const cities = req.query.cities?.toString().split(",");
+
+  try {
+    const getAll = await Promise.all<any>(
+      cities?.map((city) => {
+        return Hotel.countDocuments({ city: city });
+      })
+    );
+    success(req, res, 200, getAll);
+  } catch (e) {
+    console.log(e);
+    error(req, res, 500, (e as Error).message);
+  }
+};
+
+export const countByType = async (req: RequestCustom, res: Response) => {
+  const hotelCount = await Hotel.countDocuments({ type: "hotel" });
+  const apartmentCount = await Hotel.countDocuments({ type: "apartment" });
+  const resortCount = await Hotel.countDocuments({ type: "resort" });
+  const villaCount = await Hotel.countDocuments({ type: "villa" });
+  const cabinCount = await Hotel.countDocuments({ type: "cabin" });
+
+  try {
+    success(req, res, 200, [
+      {
+        type: "hotel",
+        count: hotelCount,
+      },
+      {
+        type: "apartment",
+        count: apartmentCount,
+      },
+      {
+        type: "resort",
+        count: resortCount,
+      },
+      {
+        type: "villa",
+        count: villaCount,
+      },
+      {
+        type: "cabin",
+        count: cabinCount,
+      },
+    ]);
+  } catch (e) {
+    console.log(e);
+    error(req, res, 500, (e as Error).message);
+  }
+};

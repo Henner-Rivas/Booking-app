@@ -7,13 +7,14 @@ import authRoute from "./routes/auth";
 import hotelRoute from "./routes/hotel";
 import userRoute from "./routes/user";
 import RoomRoute from "./routes/room";
-
+import cors from 'cors'
 import dotenv from "dotenv";
 dotenv.config();
+app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
 
-const port = 3001;
+const port = 3005;
 
 app.use(express.json());
 

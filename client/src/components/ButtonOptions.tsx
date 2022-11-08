@@ -5,9 +5,9 @@ export type action = {
   d: string;
 };
 export type options = {
-  children: number;
-  adult: number;
-  room: number;
+  children: number | undefined;
+  adult: number | undefined;
+  room: number | undefined;
 };
 
 type props = {

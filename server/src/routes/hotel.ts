@@ -1,6 +1,8 @@
 import express from "express";
 import { verifyAdmin } from "../utils/verifyToken";
 import {
+  countByCity,
+  countByType,
   createHotel,
   deleteById,
   getAllHotel,
@@ -10,7 +12,7 @@ import {
 const router = express.Router();
 
 //  get
-router.get("/:id", getOneHotel);
+router.get("/find/:id", getOneHotel);
 
 // get all
 router.get("/", getAllHotel);
@@ -23,5 +25,10 @@ router.put("/:id", verifyAdmin, updateById);
 
 // delete
 router.delete("/:id", verifyAdmin, deleteById);
+
+router.get("/countByCity", countByCity);
+router.get("/countByType", countByType);
+
+// query
 
 export default router;
