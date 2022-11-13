@@ -6,6 +6,7 @@ import {
   createHotel,
   deleteById,
   getAllHotel,
+  getHotelRooms,
   getOneHotel,
   updateById,
 } from "../controllers/hotel";
@@ -28,6 +29,7 @@ router.delete("/:id", verifyAdmin, deleteById);
 
 router.get("/countByCity", countByCity);
 router.get("/countByType", countByType);
+router.get("/room/:id", getHotelRooms);
 
 // query
 

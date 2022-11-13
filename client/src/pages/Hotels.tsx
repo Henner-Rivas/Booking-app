@@ -21,7 +21,6 @@ const Hotels = () => {
   let { data, error, loading, refetch } = useFetch(
     `/hotels?city=${destination}&min=${min | 0}&max=${max | 999999}`
   );
-  console.log("🚀 ~ file: Hotels.tsx ~ line 27 ~ Hotels ~ data", data);
 
   const handleSearch = () => {
     refetch();

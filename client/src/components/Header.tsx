@@ -11,10 +11,13 @@ import { format } from "date-fns";
 import ButtonOptions from "./ButtonOptions";
 import { useNavigate } from "react-router-dom";
 import SearchContext, { State } from "../context/SearchContext";
+import AuthContext from "../context/AuthContext"
 type props = {
   noHome?: boolean;
 };
 const Header = (props: props) => {
+  const {state:{user}} = useContext(AuthContext)
+
   let { noHome } = props;
   const [openDate, setOpenDate] = useState(false);
   const [openOptions, setOpenOptions] = useState(false);
@@ -98,9 +101,12 @@ const Header = (props: props) => {
               Gt rewarded for your travels - unlock instant savings of 10& or
               with free Lamabooking
             </p>
+
+            {!user && 
             <button className="p-2 rounded-sm bg-[#0071c2] text-white border-none font-normal">
               Login / Registrate
             </button>
+            }
 
             <div
               className="h-[50px]  bg-white flex justify-around items-center border-[2px] border-[solid] border-[#febb02] 

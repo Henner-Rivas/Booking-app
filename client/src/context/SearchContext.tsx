@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { options, action } from "../components/ButtonOptions";
+import { options } from "../components/ButtonOptions";
 import { SearchReducer } from "./reducers";
 export const INITIAL_STATE = {
   city: undefined,

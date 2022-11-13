@@ -5,18 +5,26 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { MdOutlineExitToApp } from "react-icons/md";
 import Header from "../components/Header";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFeach";
 import { Hotes } from "../interfaces/types";
 import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
+import AuthContext from "../context/AuthContext";
+import Reserve from "../components/Reserve";
 
 const Hotel = () => {
   let { id } = useParams();
 
   const [slideNumber, setSlideNumber] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [openCarruel, setOpenCarruel] = useState(false);
+  const [openBooking, setOpenBooking] = useState(false);
   let { data, loading, error } = useFetch(`/hotels/find/${id}`);
+  const {
+    state: { user },
+  } = useContext(AuthContext);
+  const navitate = useNavigate();
+
   let datatype: Hotes | any = data;
   const photos = [
     {
@@ -41,7 +49,7 @@ const Hotel = () => {
 
   const handleOpen = (i: number) => {
     setSlideNumber(i);
-    setOpen(true);
+    setOpenCarruel(true);
   };
 
   const handleMove = (direction: string) => {
@@ -57,8 +65,15 @@ const Hotel = () => {
   };
 
   const { state } = useContext(SearchContext);
-  console.log("🚀 ~ file: Hotel.tsx ~ line 61 ~ Hotel ~ dates", state);
 
+  const handleReserve = () => {
+    if (user) {
+      console.log("treu");
+      setOpenBooking(true);
+    } else {
+      navitate("/login");
+    }
+  };
   return (
     <div>
       <Header />
@@ -66,11 +81,11 @@ const Hotel = () => {
         "loading"
       ) : (
         <div className="flex  mt-5 flex-col items-center min-h-screen">
-          {open && (
+          {openCarruel && (
             <div className="sticky top-0 left-0 w-screen h-screen  z-50 bg-black bg-opacity-40  flex items-center">
               <MdOutlineExitToApp
                 className="absolute top-5 cursor-pointer right-5 text-[40px]"
-                onClick={() => setOpen(false)}
+                onClick={() => setOpenCarruel(false)}
               />
 
               <BsFillArrowLeftCircleFill
@@ -94,7 +109,10 @@ const Hotel = () => {
             </div>
           )}
           <div className="flex max-w-5xl p-1 flex-col gap-3 items-start relative">
-            <button className="absolute top-3 border-none py-2 px-4  bg-myblue2 text-white right-0 font-bold">
+            <button
+              className="absolute top-3 border-none py-2 px-4  bg-myblue2 text-white right-0 font-bold"
+              onClick={handleReserve}
+            >
               Reserve or Book Now!
             </button>
             <h1 className="text-[24px] font-bold"> {datatype.name} </h1>
@@ -140,6 +158,7 @@ const Hotel = () => {
                 <button
                   className="
              border-none py-2 px-4  bg-myblue2 text-white right-0 font-bold"
+                  onClick={handleReserve}
                 >
                   Reserve or Book Now!
                 </button>
@@ -149,6 +168,7 @@ const Hotel = () => {
           <MailList />
         </div>
       )}
+      {openBooking && <Reserve setOpenBooking={setOpenBooking} hotelId={id} />}
     </div>
   );
 };

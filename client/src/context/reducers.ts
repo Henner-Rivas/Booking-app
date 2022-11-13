@@ -1,5 +1,4 @@
 import { State, Action, INITIAL_STATE } from "./SearchContext";
-import { action } from "../components/ButtonOptions";
 
 export const SearchReducer = (state: State, action: Action) => {
   switch (action.type) {

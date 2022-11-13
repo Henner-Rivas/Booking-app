@@ -1,7 +1,9 @@
 import { error, success } from "../utils/response";
 import Hotel from "../models/Hotel";
+import Room from "../models/room";
+
 import { Response } from "express";
-import { RequestCustom } from "../interfaces/types";
+import { RequestCustom, Hotels } from '../interfaces/types';
 export const createHotel = async (req: RequestCustom, res: Response) => {
   const newHotel = new Hotel(req.body);
 
@@ -112,6 +114,22 @@ export const countByType = async (req: RequestCustom, res: Response) => {
         count: cabinCount,
       },
     ]);
+  } catch (e) {
+    console.log(e);
+    error(req, res, 500, (e as Error).message);
+  }
+};
+
+export const getHotelRooms = async (req: RequestCustom, res: Response) => {
+
+  try {
+    const hotelsFind =await Hotel.findById<any>(req.params.id)
+    console.log("🚀 ~ file: hotel.ts ~ line 127 ~ getHotelRooms ~ hotelsFind", hotelsFind)
+
+    const listRooms= await Promise.all<Hotels>(hotelsFind.rooms.map((room)=>{ return Room.findById(room)}
+      ) )
+
+    success(req, res, 200, listRooms);
   } catch (e) {
     console.log(e);
     error(req, res, 500, (e as Error).message);

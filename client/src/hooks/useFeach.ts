@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
+import { Data } from "../components/Reserve";
 
 const useFetch = (URI: string) => {
   const [data, setData] = useState([]);

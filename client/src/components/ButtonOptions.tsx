@@ -1,9 +1,6 @@
 import React from "react";
 
-export type action = {
-  i: string;
-  d: string;
-};
+
 export type options = {
   children: number | undefined;
   adult: number | undefined;
