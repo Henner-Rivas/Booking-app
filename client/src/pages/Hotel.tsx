@@ -23,8 +23,15 @@ const Hotel = () => {
   const {
     state: { user },
   } = useContext(AuthContext);
+  const {
+    state: {
+      options: { room },
+    },
+  } = useContext(SearchContext);
   const navitate = useNavigate();
-
+  const {
+    state: { dates },
+  } = useContext(SearchContext);
   let datatype: Hotes | any = data;
   const photos = [
     {
@@ -64,16 +71,22 @@ const Hotel = () => {
     setSlideNumber(newSlideNumber);
   };
 
-  const { state } = useContext(SearchContext);
-
   const handleReserve = () => {
     if (user) {
-      console.log("treu");
       setOpenBooking(true);
     } else {
       navitate("/login");
     }
   };
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  function dayDifference(date1: Date, date2: Date) {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return diffDays;
+  }
+
+  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+
   return (
     <div>
       <Header />
@@ -146,14 +159,20 @@ const Hotel = () => {
               </div>
               <div className=" bg-blue-300 p-5 flex flex-col gap-5 w-[280px] ">
                 <h1 className="text-[#555] text-lg">
-                  Perfect for a 9-night stay!
+                  Perfect for a {days === 0 ? 1 : days}-night stay!
                 </h1>
                 <span className="text-sm">
                   Located in the real heart of Krakow, this property has an
-                  excellent location score of 9.8!
+                  excellent location score of {datatype.rating}!
                 </span>
                 <h2 className="font-bold">
-                  <b>${datatype.cheapestPrice}</b> (9 nights)
+                  <b>
+                    $
+                    {(days === 0 ? 1 : days) *
+                      datatype.cheapestPrice *
+                      (room ? room : 1)}
+                  </b>{" "}
+                  ({days === 0 ? 1 : days} nights)
                 </h2>
                 <button
                   className="

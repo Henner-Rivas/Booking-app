@@ -1,6 +1,5 @@
 import React, { createContext, useReducer } from "react";
 import { options } from "../components/ButtonOptions";
-import { SearchReducer } from "./reducers";
 export const INITIAL_STATE = {
   city: undefined,
   dates: [],
@@ -18,6 +17,17 @@ export const SearchContext = createContext<{
   dispatch: ({ type, payload }: Action) => null,
 });
 
+export const SearchReducer = (state: State, action: Action) => {
+  switch (action.type) {
+    case "NEW_SEARCH":
+      return action.payload;
+    case "RESET_SEARCH":
+      return INITIAL_STATE;
+    default:
+      return state;
+  }
+};
+
 export const SearchContextProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(SearchReducer, INITIAL_STATE);
   return (
@@ -33,9 +43,14 @@ export const SearchContextProvider = ({ children }: any) => {
   );
 };
 
+export type Dates = {
+  startDate: Date;
+  endDate: Date;
+  key: any;
+};
 export type State = {
   city: string | undefined;
-  dates: string[] | never[];
+  dates: Dates[] | any;
   options: options;
 };
 

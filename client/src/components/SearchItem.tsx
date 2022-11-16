@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Hotes } from "../interfaces/types";
+import { options } from "./ButtonOptions";
 type props = {
   data: Hotes;
+  options: options;
 };
 const SearchItem = (props: props) => {
-  let { data } = props;
+  let { data, options } = props;
 
   return (
     <div className="flex flex-1 gap-3 rounded-md  p-2 shadow max-h-[250px]">
@@ -24,26 +26,34 @@ const SearchItem = (props: props) => {
           Studio Apartment with Air conditioning
         </span>
         <span className="text-[15px]">{data.desc}</span>
-        <span className="text-green-700">Free cancellation </span>
+        <span className="text-green-700">Cancelación gratis </span>
         <span className="text-green-400 text-[14px]">
-          You can cancel later, so lock in this great price today!
+          Puedes cancelar mas tarde, Aprobecha un muy buen precio
         </span>
       </div>
       <div className="flex-[1] flex flex-col justify-between">
         {data.rating && (
           <div className="flex justify-between">
-            <span className="font-medium">Excellent</span>
+            <span className="font-medium">Excelente</span>
             <button className="bg-[#003580] text-white p-1 rounded-sm">
               {data.rating}
             </button>
           </div>
         )}
         <div className="flex flex-col ">
-          <span className="text-[22px] text-right">{data.cheapestPrice}</span>
-          <span className=" text-gray-500">Includes taxes and fees</span>
+          <span className="text-[10px] text-right text-[gray]">
+            {`${options.room} noche   ${options.adult}  adulto`}
+          </span>
+          <span className="text-[14px] text-right text-[red] line-through">
+            COP {data.cheapestPrice * 0.2 + data.cheapestPrice}
+          </span>
+          <span className="text-[22px] text-right font-medium">
+            COP {data.cheapestPrice}
+          </span>
+          <span className=" text-gray-500">Incluye impuestos y cargos</span>
           <Link to={`/hotels/${data._id}`}>
-            <button className="bg-myblue2 text-white font-medium rounded-sm p-2">
-              See availability
+            <button className="bg-myblue2 w-full text-white font-medium rounded-sm p-2">
+              Ver disponibilidad
             </button>
           </Link>
         </div>

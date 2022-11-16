@@ -1,19 +1,26 @@
+import { Hotes } from "../interfaces/types";
+
 type props = {
-  data: string[];
+  featured: Hotes;
 };
 const Featured = (props: props) => {
-  let { data } = props;
+  let { featured } = props;
 
   return (
-    <div className="flex relative text-white rounded-sm h-[250px] w-full overflow-hidden max-w-[350px] ">
+    <div className="flex flex-col gap-1 w-[240px] max-w-[250px] min-w-[230px] my-0 mx-auto">
       <img
-        src="https://cf.bstatic.com/xdata/images/city/max500/957801.webp?k=a969e39bcd40cdcc21786ba92826063e3cb09bf307bcfeac2aa392b838e9b7a5&o="
+        src="https://cf.bstatic.com/xdata/images/hotel/square600/13125860.webp?k=e148feeb802ac3d28d1391dad9e4cf1e12d9231f897d0b53ca067bde8a9d3355&o=&s=1"
         alt=""
-        className="w-full object-cover"
+        className="w-full h-[200px] rounded-sm"
       />
-      <div className="absolute m-3 text-[20px] bottom-[10px] ">
-        <h1 className="font-bold text-[28px]">Dublin</h1>
-        <h2 className="font-bold text-[24px]">{data[1]} properties</h2>
+      <span className="font-bold">{featured.name}</span>
+      <span className="">{featured.city}</span>
+      <span className="">Solo por {featured.cheapestPrice}</span>
+      <div className="flex gap-2">
+        <button className="bg-[#003580] p-1 rounded-md text-white">
+          {featured.rating}
+        </button>
+        <span>Excellent</span>
       </div>
     </div>
   );

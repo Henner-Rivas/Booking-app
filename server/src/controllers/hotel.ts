@@ -1,6 +1,6 @@
 import { error, success } from "../utils/response";
 import Hotel from "../models/Hotel";
-import Room from "../models/room";
+import Room from "../models/Room";
 
 import { Response } from "express";
 import { RequestCustom, Hotels } from '../interfaces/types';
@@ -124,7 +124,6 @@ export const getHotelRooms = async (req: RequestCustom, res: Response) => {
 
   try {
     const hotelsFind =await Hotel.findById<any>(req.params.id)
-    console.log("🚀 ~ file: hotel.ts ~ line 127 ~ getHotelRooms ~ hotelsFind", hotelsFind)
 
     const listRooms= await Promise.all<Hotels>(hotelsFind.rooms.map((room)=>{ return Room.findById(room)}
       ) )
@@ -135,3 +134,6 @@ export const getHotelRooms = async (req: RequestCustom, res: Response) => {
     error(req, res, 500, (e as Error).message);
   }
 };
+
+
+

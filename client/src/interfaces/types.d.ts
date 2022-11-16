@@ -14,3 +14,21 @@ export interface Hotes {
   featured: boolean;
   __v: number;
 }
+
+export interface Room {
+  _id: string;
+  title: string;
+  price: number;
+  desc: string;
+  maxPeople: number;
+  roomNumbers: RoomNumber[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export interface RoomNumber {
+  number: number;
+  unavailableDates: string[] ;
+  _id: string;
+}

@@ -9,6 +9,7 @@ import {
   getHotelRooms,
   getOneHotel,
   updateById,
+  
 } from "../controllers/hotel";
 const router = express.Router();
 

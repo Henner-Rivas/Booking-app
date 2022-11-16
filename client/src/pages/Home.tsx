@@ -1,16 +1,16 @@
 import React from "react";
-import ListProperty from "../components/ListFeatured";
 import PropertyList from "../components/ListProperty";
-import FeaturedProperties from "../components/FeaturedProperties";
 import MailList from "../components/MailList";
 import Header from "../components/Header";
+import ListPropertyCity from "../components/ListPropertyCity";
+import ListFeatured from "../components/ListFeatured";
 
 const Home = () => {
   return (
     <>
       <Header noHome={true} />
       <div className="min-h-screen mt-[50px] flex gap-5   w-full flex-col items-center ">
-        <ListProperty />
+        <ListPropertyCity />
 
         <h1 className="text-[18px] t-1 max-w-5xl font-bold ">
           {" "}
@@ -24,7 +24,7 @@ const Home = () => {
           Casas que las personas aman{" "}
         </h1>
 
-        <FeaturedProperties />
+        <ListFeatured />
 
         <MailList />
       </div>

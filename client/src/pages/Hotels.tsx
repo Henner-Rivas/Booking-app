@@ -8,6 +8,8 @@ import SearchItem from "../components/SearchItem";
 import Header from "../components/Header";
 import useFetch from "../hooks/useFeach";
 import { Hotes } from "../interfaces/types";
+import { useContext } from "react";
+import SearchContext from "../context/SearchContext";
 
 const Hotels = () => {
   const location = useLocation();
@@ -21,8 +23,13 @@ const Hotels = () => {
   let { data, error, loading, refetch } = useFetch(
     `/hotels?city=${destination}&min=${min | 0}&max=${max | 999999}`
   );
+  const { dispatch } = useContext(SearchContext);
 
   const handleSearch = () => {
+    dispatch({
+      type: "NEW_SEARCH",
+      payload: { city: destination, dates: date, options: options },
+    });
     refetch();
   };
   return (
@@ -104,6 +111,11 @@ const Hotels = () => {
                     className="w-[40px] outline-none p-1"
                     value={options?.adult}
                     min={1}
+                    onChange={(e) =>
+                      setOptions((prev) => {
+                        return { ...prev, adult: e.target.value };
+                      })
+                    }
                   />
                 </div>
                 <div className="flex justify-between items-center">
@@ -113,6 +125,11 @@ const Hotels = () => {
                     className="w-[40px] outline-none p-1"
                     value={options?.children}
                     min={0}
+                    onChange={(e) =>
+                      setOptions((prev) => {
+                        return { ...prev, children: e.target.value };
+                      })
+                    }
                   />
                 </div>
                 <div className="flex justify-between items-center">
@@ -122,6 +139,11 @@ const Hotels = () => {
                     className="w-[40px] outline-none p-1"
                     value={options?.room}
                     min={1}
+                    onChange={(e) =>
+                      setOptions((prev) => {
+                        return { ...prev, room: e.target.value };
+                      })
+                    }
                   />
                 </div>
 
@@ -138,7 +160,7 @@ const Hotels = () => {
             {loading
               ? "loading"
               : data?.map((hotel: Hotes) => (
-                  <SearchItem key={hotel._id} data={hotel} />
+                  <SearchItem key={hotel._id} data={hotel} options={options} />
                 ))}
           </div>
         </div>

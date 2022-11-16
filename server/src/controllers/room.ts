@@ -1,4 +1,4 @@
-import Room from "../models/room";
+import Room from "../models/Room";
 import Hotel from "../models/Hotel";
 import { Request } from "express";
 import { Response } from "express";
@@ -70,4 +70,17 @@ export const deleteById = async (req: Request, res: Response) => {
   }
 };
 
+export const updateRoomAvailability = async (req: Request, res: Response) => {
+  try {
+   let update= await Room.updateOne({"roomNumbers._id":req.params.id},{
+    $push:{
+      "roomNumbers.$.unavailableDates":req.body.dates
+    }
+   })
+    success(req, res, 200,"has been updated");
+  } catch (e) {
+    console.log(e);
+    error(req, res, 500, (e as Error).message);
+  }
+};
 exports = { createRoom, updateById, getAllRoom, getOneRoom, deleteById };

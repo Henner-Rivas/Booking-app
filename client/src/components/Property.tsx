@@ -11,8 +11,8 @@ const Property = (props: props) => {
   let { img, data } = props;
 
   return (
-    <li className="rounded-[10px] overflow-hidden cursor-pointer">
-      <img src={img} alt="" className="w-full h-[150px]" />
+    <li className="rounded-[10px] overflow-hidden cursor-pointer max-w-[270px] my-0 mx-auto">
+      <img src={img} alt="" className="w-full h-[150px] " />
       <div className="flex  flex-col">
         <h1 className="text-[18px] font-medium capitalize"> {data["type"]} </h1>
         <h2 className="text-[14px] font-light">
