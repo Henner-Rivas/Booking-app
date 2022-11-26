@@ -1,9 +1,9 @@
 import { error, success } from "../utils/response";
 import Hotel from "../models/Hotel";
-import Room from "../models/Room";
 
 import { Response } from "express";
 import { RequestCustom, Hotels } from '../interfaces/types';
+import Room from "../models/Room";
 export const createHotel = async (req: RequestCustom, res: Response) => {
   const newHotel = new Hotel(req.body);
 

@@ -1,6 +1,7 @@
 import express from "express";
 import { Express } from "express";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 import { connectDB } from "./db/conection";
 const app = express();
 import authRoute from "./routes/auth";
@@ -13,7 +14,7 @@ dotenv.config();
 app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
-
+app.use(bodyParser.json())
 const port = 3005;
 
 app.use(express.json());

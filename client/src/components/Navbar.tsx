@@ -19,7 +19,7 @@ const Navbar = () => {
           <div className="flex gap-2">
             {" "}
             <span> Welcome</span>{" "}
-            <h1 className="font-medium"> {user.body.usermane} </h1>{" "}
+            <h1 className="font-medium"> {user?.usermane || ""} </h1>{" "}
           </div>
         ) : (
           <div className="flex gap-4">

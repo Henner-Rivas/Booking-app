@@ -17,13 +17,13 @@ router.get("/:id", getOneRoom);
 router.get("/", getAllRoom);
 
 // create
-router.post("/:hotelId", verifyAdmin, createRoom);
+router.post("/:hotelId" /*, verifyAdmin */, createRoom);
 
 // put
 router.put("/:id", verifyAdmin, updateById);
 router.put("/availability/:id", updateRoomAvailability );
 
 // delete
-router.delete("/:id/:hotelId", verifyAdmin, deleteById);
+router.delete("/:id/:hotelId" /* verifyAdmin */, deleteById);
 
 export default router;

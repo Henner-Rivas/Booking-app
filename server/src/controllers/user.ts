@@ -9,10 +9,8 @@ export const createUser = async (req: RequestCustom, res: Response) => {
   const hash = bcrypt.hashSync(req.body.password, salt);
 
   const newUser = new User({
-    usermane: req.body.username,
+   ...req.body,
     password: hash,
-    email: req.body.email,
-    isAdmin: req.body.isAdmin,
   });
   try {
     const saveUser = await newUser.save();

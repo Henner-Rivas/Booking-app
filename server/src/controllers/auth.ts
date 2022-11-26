@@ -9,10 +9,9 @@ export const register = async (req: RequestCustomUser, res: Response) => {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
     const newUser = new UserModel({
-      usermane: req.body.username,
+      ...req.body,
       password: hash,
-      email: req.body.email,
-      isAdmin: req.body.isAdmin,
+ 
     });
 
     await newUser.save();
@@ -40,8 +39,8 @@ export const login = async (req: RequestCustomUser, res: Response) => {
       { id: findUser._id, isAdmin: findUser.isAdmin },
       process.env.JWT || "henner"
     );
-    res.cookie("token", token, { httpOnly: true });
-    success(req, res, 200, { ...others });
+    res.cookie("token", token);
+    success(req, res, 200, { ...others,isAdmin });
   } catch (e) {
     console.log(e);
     error(req, res, 500, (e as Error).message);

@@ -46,8 +46,8 @@
             "last 1 safari version"
         ]
     },
-    "proxy": "http://localhost:3005/api",
-    "devDependencies": {
+   "proxy": "http://localhost:3005/api",
+     "devDependencies": {
         "@types/react-date-range": "^1.4.4",
         "autoprefixer": "^10.4.13",
         "postcss": "^8.4.18",

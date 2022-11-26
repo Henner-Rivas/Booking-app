@@ -22,18 +22,18 @@ router.get("/ckeckauthentication/:id", verifyuser, (req, res, next) => {
 router.get("/ckeckAdmin/:id", verifyAdmin, (req, res, next) => {
   res.send("hello admin you are logged in and can delete you account");
 }); */
-router.get("/:id", verifyuser, getOneUser);
+router.get("/:id" /* verifyuser */, getOneUser);
 
 // get all
-router.get("/", verifyAdmin, getAllUser);
+router.get("/" /* verifyAdmin */, getAllUser);
 
 // create
-router.post("/", verifyuser, createUser);
+router.post("/",  createUser);
 
 // put
-router.put("/:id", verifyuser, updateById);
+router.put("/:id" /* verifyuser */, updateById);
 
 // delete
-router.delete("/:id", verifyuser, deleteById);
+router.delete("/:id" /* verifyuser */, deleteById);
 
 export default router;

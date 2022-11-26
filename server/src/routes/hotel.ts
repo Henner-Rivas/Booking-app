@@ -20,13 +20,13 @@ router.get("/find/:id", getOneHotel);
 router.get("/", getAllHotel);
 
 // create
-router.post("/", verifyAdmin, createHotel);
+router.post("/"/* , verifyAdmin */, createHotel);
 
 // put
-router.put("/:id", verifyAdmin, updateById);
+router.put("/:id"/* , verifyAdmin */, updateById);
 
 // delete
-router.delete("/:id", verifyAdmin, deleteById);
+router.delete("/:id"/* , verifyAdmin */, deleteById);
 
 router.get("/countByCity", countByCity);
 router.get("/countByType", countByType);
