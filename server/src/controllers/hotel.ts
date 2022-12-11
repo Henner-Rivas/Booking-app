@@ -3,7 +3,7 @@ import Hotel from "../models/Hotel";
 
 import { Response } from "express";
 import { RequestCustom, Hotels } from '../interfaces/types';
-import Room from "../models/Room";
+import Room from "../models/room";
 export const createHotel = async (req: RequestCustom, res: Response) => {
   const newHotel = new Hotel(req.body);
 

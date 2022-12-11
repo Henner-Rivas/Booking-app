@@ -1,26 +1,26 @@
 import "./styles.scss";
-import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp'
+import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 
+type Props = {
+  type: string;
+};
+const Widget = (props: Props) => {
+  let { type } = props;
 
-type Props={
-type:string;
-}
-const Widget = (props:Props) => {
-    let {type} = props
-
-    let data;
-    const amount = 100;
-    const diff = 20;
+  let data;
+  const amount = 100;
+  const diff = 20;
   switch (type) {
     case "user":
       data = {
         title: "USERS",
         isMoney: false,
         link: "See all users",
+
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -84,16 +84,18 @@ const Widget = (props:Props) => {
     <div className="widget">
       <div className="left">
         <span className="title">{data?.title}</span>
-        <span className="counter">{data?.isMoney ?` $${amount}` : amount }</span>
+        <span className="counter">
+          {data?.isMoney ? ` $${amount}` : amount}
+        </span>
         <span className="link">{data?.link}</span>
       </div>
       <div className="right">
         <div className="percentage positive">
-          <KeyboardArrowUp/>
+          <KeyboardArrowUp />
           <span>20%</span>
         </div>
-         {data?.icon}
-       </div>
+        {data?.icon}
+      </div>
     </div>
   );
 };

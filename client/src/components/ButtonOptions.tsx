@@ -1,6 +1,5 @@
 import React from "react";
 
-
 export type options = {
   children: number | undefined;
   adult: number | undefined;

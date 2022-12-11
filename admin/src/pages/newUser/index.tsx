@@ -33,7 +33,7 @@ const NewUser = () => {
         img: url,
       };
 
-      await axios.post("http://localhost:3005/api/auth/register", newUser);
+      await axios.post("http://localhost:3005/api/users/", newUser);
     } catch (err) {
       console.log(err);
     }

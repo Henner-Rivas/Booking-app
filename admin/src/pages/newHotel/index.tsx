@@ -1,23 +1,39 @@
 import "./styles.scss";
 
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { hotelInputs } from "../../inputsSource";
 import axios from "axios";
 import useFetch from "../../hooks/useFeach";
 import { RoomType } from "../../interfaces/type";
-
-const NewHotel = () => {
+import { useLocation } from "react-router-dom";
+type Props = {
+  type: "EDIT" | "NEW";
+};
+const NewHotel = (Props: Props) => {
+  let { type } = Props;
+  let location = useLocation();
+  const id = location.pathname.split("/")[2];
+  console.log("🚀 ~ file: index.tsx:17 ~ NewHotel ~ id", id);
   const [files, setFiles] = useState<any>("");
-  const [info, setInfo] = useState({});
+  const [info, setInfo] = useState<any>({});
+  console.log("🚀 ~ file: index.tsx:20 ~ NewHotel ~ info", info);
   const [rooms, setRooms] = useState<any>();
-
   const { data, loading, error } = useFetch("http://localhost:3005/api/rooms/");
+  const {
+    data: dataf,
+    loading: loadingf,
+    error: arrorf,
+  } = useFetch(`http://localhost:3005/api/hotels/find/${id}`);
+
+  useEffect(() => {
+    setInfo({ ...dataf } ? { ...dataf } : {});
+  }, [dataf]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setInfo((prev: any) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
   const handleSelect = (e: any) => {
@@ -27,8 +43,6 @@ const NewHotel = () => {
     );
     setRooms(value);
   };
-
-  console.log(files);
 
   const handleClick = async (e: React.MouseEvent<Element, MouseEvent>) => {
     e.preventDefault();
@@ -55,8 +69,11 @@ const NewHotel = () => {
         rooms,
         photos: list,
       };
-
-      await axios.post("http://localhost:3005/api/hotels", newhotel);
+      if (type === "EDIT") {
+        await axios.put(`http://localhost:3005/api/hotels/${id}`, newhotel);
+      } else {
+        await axios.post("http://localhost:3005/api/hotels", newhotel);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -100,6 +117,7 @@ const NewHotel = () => {
                   onChange={handleChange}
                   type={input.type}
                   placeholder={input.placeholder}
+                  value={info[input.id]}
                 />
               </div>
             ))}

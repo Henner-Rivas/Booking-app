@@ -15,6 +15,7 @@ const Featured = (props: props) => {
       />
       <span className="font-bold">{featured.name}</span>
       <span className="">{featured.city}</span>
+
       <span className="">Solo por {featured.cheapestPrice}</span>
       <div className="flex gap-2">
         <button className="bg-[#003580] p-1 rounded-md text-white">

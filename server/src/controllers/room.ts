@@ -1,4 +1,4 @@
-import Room from "../models/Room";
+import Room from "../models/room";
 import Hotel from "../models/Hotel";
 import { Request } from "express";
 import { Response } from "express";

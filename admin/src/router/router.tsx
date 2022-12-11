@@ -6,13 +6,16 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import NotFound from "../pages/notFound";
 import LayoutPublic from "../Layout/LayoutPublic";
 import Users from "../pages/users";
-import List from "../pages/userDetails";
+import UserDetails from "../pages/userDetails";
+import HotelDetails from "../pages/hotelDetails";
+
 import { useContext } from "react";
 import AuthContext, { ProtectRoute } from "../context/AuthContext";
 import Hotels from "../pages/Hotels";
 import NewUser from "../pages/newUser";
 import Rooms from "../pages/rooms";
 import NewRoom from "../pages/newRooms";
+import RoomDetails from "../pages/roomDeails";
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +45,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "/users/:id",
-            element: <List />,
+            element: <UserDetails />,
           },
 
           {
@@ -55,14 +58,18 @@ export const router = createBrowserRouter([
           },
           {
             path: "/hotels/:id",
-            element: <List />,
+            element: <HotelDetails />,
+          },
+
+          {
+            path: "hotels/:id/edit",
+            element: <NewHotel type="EDIT" />,
           },
 
           {
             path: "hotels/new",
-            element: <NewHotel />,
+            element: <NewHotel type="NEW" />,
           },
-
           {
             path: "rooms",
             element: <Rooms />,
@@ -71,6 +78,14 @@ export const router = createBrowserRouter([
           {
             path: "rooms/new",
             element: <NewRoom />,
+          },
+          {
+            path: "rooms/:id/edit",
+            element: <NewRoom />,
+          },
+          {
+            path: "/rooms/:id",
+            element: <RoomDetails />,
           },
         ],
       },

@@ -2,15 +2,17 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
+const process = require("process");
+
 export async function connectDB() {
   try {
-    await mongoose.connect(
-      process.env.MONGODB ||
-        "mongodb+srv://Henner:Henner@cluster0.nzmndlx.mongodb.net/booking-app?retryWrites=true&w=majority"
-    );
+
+    await mongoose.connect(process.env.MONGODB 
+);
     console.log("connected to mongoDB");
   } catch (error) {
-    console.log(error);
+
+    console.log("Error  conection",error);
   }
 }
 mongoose.connection.on("disconnected", () => {
